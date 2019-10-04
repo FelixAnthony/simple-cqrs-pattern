@@ -44,7 +44,7 @@ public class GetFooAsyncHandler : IQueryHandler<GetFooQuery, GetFooResult>
 ```C#
 public class GetBarAsyncHandler : ICommandHandler<GetBarCommand>
 {
-    public async void HandleAsync(GetBarCommand command)
+    public async Task HandleAsync(GetBarCommand command)
     {
         // do stuff with command
     }
