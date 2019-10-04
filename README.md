@@ -36,7 +36,7 @@ public class GetFooAsyncHandler : IQueryHandler<GetFooQuery, GetFooResult>
 {
     public GetFooResult HandleAsync(GetFooQuery query)
     {
-        return new GetFooResult { Foo = query.Foo, Bar = query.Bar }
+        return new GetFooResult { Foo = query.Foo, Bar = query.Bar };
     }
 }
 ```
