@@ -1,5 +1,5 @@
 # simple-cqrs-pattern
-A simple nuget package to implement the Command Query Responsibility Segragation pattern in your .Net Core workflow.
+A simple nuget package to implement the Command Query Responsibility Segragation pattern in your asynchronous .Net Core workflow.
 
 ## Install the nuget package in any project using this pattern
 ```
