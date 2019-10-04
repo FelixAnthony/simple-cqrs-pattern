@@ -20,7 +20,6 @@ MapCQRSDependencies(services);
 
 ## And then register your queries or commands:
 ### (you can use another function or class as the list grows)
-##
 
 ```C#
 private void MapCQRSDependencies(IServiceCollection services)
