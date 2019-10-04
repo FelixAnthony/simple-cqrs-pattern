@@ -34,7 +34,7 @@ private void MapCQRSDependencies(IServiceCollection services)
 ```C#
 public class GetFooAsyncHandler : IQueryHandler<GetFooQuery, GetFooResult>
 {
-    public GetFooResult HandleAsync(GetFooQuery query)
+    public async GetFooResult HandleAsync(GetFooQuery query)
     {
         return new GetFooResult { Foo = query.Foo, Bar = query.Bar };
     }
@@ -44,7 +44,7 @@ public class GetFooAsyncHandler : IQueryHandler<GetFooQuery, GetFooResult>
 ```C#
 public class GetBarAsyncHandler : ICommandHandler<GetBarCommand>
 {
-    public void HandleAsync(GetBarCommand command)
+    public async void HandleAsync(GetBarCommand command)
     {
         // do stuff with command
     }
