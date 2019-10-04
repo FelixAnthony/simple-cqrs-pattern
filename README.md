@@ -14,6 +14,8 @@ services.AddCommandQueryHandlers(typeof(IQueryHandler<,>));
 
 services.AddScoped<ICommandDispatcher, CommandDispatcher>();
 services.AddScoped<IQueryDispatcher, QueryDispatcher>();
+
+MapCQRSDependencies(services);
 ```
 
 ## And then register your queries or commands in the same function:
