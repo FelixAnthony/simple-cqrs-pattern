@@ -18,7 +18,7 @@ services.AddScoped<IQueryDispatcher, QueryDispatcher>();
 MapCQRSDependencies(services);
 ```
 
-## And then register your queries or commands in the same function:
+## And then register your queries or commands:
 ### (you can use another function or class as the list grows)
 
 ```C#
