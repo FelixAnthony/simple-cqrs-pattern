@@ -47,9 +47,9 @@ public class GetBarAsyncHandler : ICommandHandler<GetBarCommand>
     public async Task HandleAsync(GetBarCommand command)
     {
         // do stuff with command
-        // if fails throw an exception. This will terminate the request handling pipeline.
+        // if fails throw an exception, this will terminate the request handling pipeline
         // maybe add a retry policy
-        // you can also build your own exception handling into your Pipeline.
+        // you can also build your own exception handling into your pipeline
     }
 }
 ```
