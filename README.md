@@ -77,12 +77,12 @@ public class ExampleController : ControllerBase
         [Authorize]
         public async Task<ActionResult> GetBarAsync([FromQuery, BindRequired] long userId)
         {
-            await _commandDispatcher.HandleAsync(new GetBarCommand { UserId = userId });
+            await _commandDispatcher.HandleAsync(new BarCommand { UserId = userId });
 
             return Ok();
         }
 		
-		/// <summary>
+	/// <summary>
         /// Foo endpoint
         /// </summary>
         /// <returns></returns>
