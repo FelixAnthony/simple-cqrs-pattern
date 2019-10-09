@@ -28,7 +28,7 @@ private void MapCQRSDependencies(IServiceCollection services)
 }
 ```
 
-## Make sure your handler classes inherit from the Simple.CQRS Interfaces:
+## Finall, make sure your handler classes inherit from the Simple.CQRS Interfaces:
 
 ```C#
 public class GetFooAsyncHandler : IQueryHandler<GetFooQuery, GetFooResult>
