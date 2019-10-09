@@ -75,7 +75,7 @@ public class ExampleController : ControllerBase
         /// <returns></returns>
 	[HttpPost("{userId}")]
         [Authorize]
-        public async Task<ActionResult> GetBarAsync([FromQuery, BindRequired] long userId)
+        public async Task<ActionResult> PostBarAsync([FromQuery, BindRequired] long userId)
         {
             await _commandDispatcher.HandleAsync(new BarCommand { UserId = userId });
 
@@ -88,7 +88,7 @@ public class ExampleController : ControllerBase
         /// <returns></returns>
 	[HttpGet]
         [Authorize]
-        public async Task<ActionResult> GetBarAsync(Request request)
+        public async Task<ActionResult> GetFooAsync(Request request)
         {
             var result = await _queryDispatcher.HandleAsync<GetFooQuery, GetFooResult>(new GetFooQuery { Foo = request.Foo, Bar =  request.Bar });
 
