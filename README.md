@@ -75,12 +75,11 @@ public class ExampleController : ControllerBase
         /// <returns></returns>
 	[HttpPost("{userId}")]
         [Authorize]
-        [ProducesResponseType(typeof(BaseResponse), StatusCodes.Status200OK)]
         public async Task<ActionResult> GetBarAsync([FromQuery, BindRequired] long userId)
         {
             await _commandDispatcher.HandleAsync(new GetBarCommand { UserId = userId });
 
-            return Ok(new BaseResponse());
+            return Ok();
         }
 		
 		/// <summary>
@@ -89,12 +88,11 @@ public class ExampleController : ControllerBase
         /// <returns></returns>
 	[HttpGet]
         [Authorize]
-        [ProducesResponseType(typeof(BaseResponse), StatusCodes.Status200OK)]
         public async Task<ActionResult> GetBarAsync(Request request)
         {
             var result = await _queryDispatcher.HandleAsync<GetFooQuery, GetFooResult>(new GetFooQuery { Foo = request.Foo, Bar =                   request.Bar });
 
-            return Ok(new BaseResponse(result));
+            return Ok(result);
         }
 }
 ```
