@@ -73,7 +73,7 @@ public class ExampleController : ControllerBase
         /// Bar endpoint
         /// </summary>
         /// <returns></returns>
-		[HttpPost("{userId}")]
+	[HttpPost("{userId}")]
         [Authorize]
         [ProducesResponseType(typeof(BaseResponse), StatusCodes.Status200OK)]
         public async Task<ActionResult> GetBarAsync([FromQuery, BindRequired] long userId)
@@ -87,12 +87,12 @@ public class ExampleController : ControllerBase
         /// Foo endpoint
         /// </summary>
         /// <returns></returns>
-		[HttpGet]
+	[HttpGet]
         [Authorize]
         [ProducesResponseType(typeof(BaseResponse), StatusCodes.Status200OK)]
         public async Task<ActionResult> GetBarAsync(Request request)
         {
-            var result = await _queryDispatcher.HandleAsync<GetFooQuery, GetFooResult>(new GetFooQuery { Foo = request.Foo, Bar =             request.Bar });
+            var result = await _queryDispatcher.HandleAsync<GetFooQuery, GetFooResult>(new GetFooQuery { Foo = request.Foo, Bar =                   request.Bar });
 
             return Ok(new BaseResponse(result));
         }
