@@ -24,11 +24,11 @@ MapCQRSDependencies(services);
 private void MapCQRSDependencies(IServiceCollection services)
 {
     services.AddScoped<IQueryHandler<GetFooQuery, GetFooResult>, GetFooAsyncHandler>();
-    services.AddScoped<ICommandHandler<GetBarCommand>, GetBarAsyncHandler>();
+    services.AddScoped<ICommandHandler<BarCommand>, BarAsyncHandler>();
 }
 ```
 
-## Finally, make sure your handler classes inherit from the Simple.CQRS Interfaces:
+## Make sure your handler classes inherit from the Simple.CQRS Interfaces:
 
 ```C#
 public class GetFooAsyncHandler : IQueryHandler<GetFooQuery, GetFooResult>
@@ -41,14 +41,60 @@ public class GetFooAsyncHandler : IQueryHandler<GetFooQuery, GetFooResult>
 ```
 
 ```C#
-public class GetBarAsyncHandler : ICommandHandler<GetBarCommand>
+public class GetBarAsyncHandler : ICommandHandler<BarCommand>
 {
-    public async Task HandleAsync(GetBarCommand command)
+    public async Task HandleAsync(BarCommand command)
     {
         // do stuff with command
         // if fails throw an exception, this will terminate the request handling pipeline
         // maybe add a retry policy
         // you can also build your own exception handling into your pipeline
     }
+}
+```
+
+## Finally, dispatch requests using the dispatcher in your controller:
+
+```C#
+public class ExampleController : ControllerBase
+{
+        private readonly IQueryDispatcher _queryDispatcher;
+        private readonly ICommandDispatcher _commandDispatcher;
+
+
+        public AccountsController(IQueryDispatcher queryDispatcher, 
+            ICommandDispatcher commandDispatcher)
+        {
+            _queryDispatcher = queryDispatcher;
+            _commandDispatcher = commandDispatcher;
+        }
+
+        /// <summary>
+        /// Bar endpoint
+        /// </summary>
+        /// <returns></returns>
+		[HttpPost("{userId}")]
+        [Authorize]
+        [ProducesResponseType(typeof(BaseResponse), StatusCodes.Status200OK)]
+        public async Task<ActionResult> GetBarAsync([FromQuery, BindRequired] long userId)
+        {
+            await _commandDispatcher.HandleAsync(new GetBarCommand { UserId = userId });
+
+            return Ok(new BaseResponse());
+        }
+		
+		/// <summary>
+        /// Foo endpoint
+        /// </summary>
+        /// <returns></returns>
+		[HttpGet]
+        [Authorize]
+        [ProducesResponseType(typeof(BaseResponse), StatusCodes.Status200OK)]
+        public async Task<ActionResult> GetBarAsync(Request request)
+        {
+            var result = await _queryDispatcher.HandleAsync<GetFooQuery, GetFooResult>(new GetFooQuery { Foo = request.Foo, Bar =             request.Bar });
+
+            return Ok(new BaseResponse(result));
+        }
 }
 ```
