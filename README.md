@@ -63,7 +63,7 @@ public class ExampleController : ControllerBase
 
 
         public AccountsController(IQueryDispatcher queryDispatcher, 
-            ICommandDispatcher commandDispatcher)
+        ICommandDispatcher commandDispatcher)
         {
             _queryDispatcher = queryDispatcher;
             _commandDispatcher = commandDispatcher;
@@ -90,7 +90,7 @@ public class ExampleController : ControllerBase
         [Authorize]
         public async Task<ActionResult> GetBarAsync(Request request)
         {
-            var result = await _queryDispatcher.HandleAsync<GetFooQuery, GetFooResult>(new GetFooQuery { Foo = request.Foo, Bar =                   request.Bar });
+            var result = await _queryDispatcher.HandleAsync<GetFooQuery, GetFooResult>(new GetFooQuery { Foo = request.Foo, Bar =  request.Bar });
 
             return Ok(result);
         }
